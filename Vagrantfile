@@ -23,7 +23,8 @@ Vagrant.configure(2) do |config|
         vbox.customize ['modifyvm', :id, '--vram', '256']
     end
   
-    # Enable provisioning with a shell script. 
-    # cf. https://www.vagrantup.com/docs/provisioning/
-    config.vm.provision :shell, path: "provison.sh"
+    ## cf. https://www.vagrantup.com/docs/provisioning/
+    config.vm.provision :shell, path: 'scripts/git.sh'
+    config.vm.provision :shell, path: 'scripts/docker-ce.sh'
+    config.vm.provision :shell, path: 'scripts/docker-compose.sh'
   end
