@@ -9,7 +9,7 @@ Vagrant.configure(2) do |config|
     
     config.vm.provider 'virtualbox' do |v|
         vb.cpus = 4
-        vb.memory = '6144'
+        vb.memory = '8192'
         vbox.gui = true
         vbox.linked_clone = true
         vbox.customize ['modifyvm', :id, '--bioslogodisplaytime', '0']
