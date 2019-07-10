@@ -24,7 +24,12 @@ Vagrant.configure(2) do |config|
     end
   
     ## cf. https://www.vagrantup.com/docs/provisioning/
-    config.vm.provision :shell, path: 'scripts/git.sh'
-    config.vm.provision :shell, path: 'scripts/docker-ce.sh'
-    config.vm.provision :shell, path: 'scripts/docker-compose.sh'
+    config.vm.provision :shell, path: 'scripts/preinstalls.sh'
+    config.vm.define :inner do |inner|
+        inner.vm.provision :shell, path: 'scripts/docker-ce.sh'
+        inner.vm.provision :shell, path: 'scripts/docker-compose.sh'
+        inner.vm.provision :shell, path: 'scripts/pyenv.sh'
+        inner.vm.provision :shell, path: 'scripts/vscode.sh'
+        inner.vm.provision :shell, path: 'scripts/yarn.sh'
+    end
   end
