@@ -7,9 +7,9 @@ Vagrant.configure(2) do |config|
     #config.vm.box = 'bento/ubuntu-18.04'
     config.vm.box = 'ubuntu/bionic64'
     
-    config.vm.provider 'virtualbox' do |v|
-        vb.cpus = 4
-        vb.memory = '8192'
+    config.vm.provider 'virtualbox' do |vbox|
+        vbox.cpus = 4
+        vbox.memory = '8192'
         vbox.gui = true
         vbox.linked_clone = true
         vbox.customize ['modifyvm', :id, '--bioslogodisplaytime', '0']
@@ -28,7 +28,10 @@ Vagrant.configure(2) do |config|
     config.vm.define :inner do |inner|
         inner.vm.provision :shell, path: 'scripts/docker-ce.sh'
         inner.vm.provision :shell, path: 'scripts/docker-compose.sh'
+        inner.vm.provision :shell, path: 'scripts/golang.sh'
+        inner.vm.provision :shell, path: 'scripts/google-chrome.sh'
         inner.vm.provision :shell, path: 'scripts/pyenv.sh'
+        inner.vm.provision :shell, path: 'scripts/swift4tf.sh'
         inner.vm.provision :shell, path: 'scripts/vscode.sh'
         inner.vm.provision :shell, path: 'scripts/yarn.sh'
     end
