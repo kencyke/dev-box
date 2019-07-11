@@ -6,6 +6,7 @@ Vagrant.require_version '>= 1.8.0'
 Vagrant.configure(2) do |config|
     #config.vm.box = 'bento/ubuntu-18.04'
     config.vm.box = 'ubuntu/bionic64'
+    config.ssh.username = 'vagrant'
     
     config.vm.provider 'virtualbox' do |vbox|
         vbox.cpus = 4
@@ -24,15 +25,13 @@ Vagrant.configure(2) do |config|
     end
   
     ## cf. https://www.vagrantup.com/docs/provisioning/
-    config.vm.provision :shell, path: 'scripts/preinstalls.sh'
-    config.vm.define :inner do |inner|
-        inner.vm.provision :shell, path: 'scripts/docker-ce.sh'
-        inner.vm.provision :shell, path: 'scripts/docker-compose.sh'
-        inner.vm.provision :shell, path: 'scripts/golang.sh'
-        inner.vm.provision :shell, path: 'scripts/google-chrome.sh'
-        inner.vm.provision :shell, path: 'scripts/pyenv.sh'
-        inner.vm.provision :shell, path: 'scripts/swift4tf.sh'
-        inner.vm.provision :shell, path: 'scripts/vscode.sh'
-        inner.vm.provision :shell, path: 'scripts/yarn.sh'
-    end
+    config.vm.provision :shell, path: 'scripts/preinstalls.sh', preserve_order: true
+    config.vm.provision :shell, path: 'scripts/docker-ce.sh', env: {'SSH_USER': config.ssh.username}
+    config.vm.provision :shell, path: 'scripts/docker-compose.sh'
+    config.vm.provision :shell, path: 'scripts/golang.sh'
+    config.vm.provision :shell, path: 'scripts/google-chrome.sh'
+    config.vm.provision :shell, path: 'scripts/pyenv.sh', env: {'SSH_USER': config.ssh.username}
+    config.vm.provision :shell, path: 'scripts/swift4tf.sh'
+    config.vm.provision :shell, path: 'scripts/vscode.sh'
+    config.vm.provision :shell, path: 'scripts/yarn.sh'
   end
