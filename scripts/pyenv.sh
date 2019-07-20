@@ -2,9 +2,10 @@
 
 ## cf. https://github.com/pyenv/pyenv#basic-github-checkout
 
-command -v pyenv 2>/dev/null | grep "pyenv" >/dev/null 2>&1 && exit 0
-
 SSH_USER_HOME="/home/${SSH_USER}"
+if [ -e "${SSH_USER_HOME}/.pyenv/bin/pyenv" ]; then
+    exit 0
+fi
 
 set -x
 
