@@ -26,6 +26,7 @@ Vagrant.configure(2) do |config|
   
     ## cf. https://www.vagrantup.com/docs/provisioning/
     config.vm.provision :shell, path: 'scripts/preinstalls.sh', preserve_order: true
+    config.vm.provision :shell, path: 'scripts/lxde.sh', preserve_order: true
     config.vm.provision :shell, path: 'scripts/docker-ce.sh', env: {'SSH_USER': config.ssh.username}
     config.vm.provision :shell, path: 'scripts/docker-compose.sh'
     config.vm.provision :shell, path: 'scripts/golang.sh'
