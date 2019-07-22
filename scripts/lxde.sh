@@ -7,4 +7,4 @@ set -x
 apt-get update
 
 apt-get install -y --no-install-recommends \
-    lubuntu-core lxde lightdm openbox lxde-common lxsession lxsession-logout lxterminal
+    lubuntu-core lightdm lxde lxde-common lxsession-logout
