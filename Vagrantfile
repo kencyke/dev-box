@@ -9,6 +9,7 @@ Vagrant.configure(2) do |config|
     config.ssh.username = 'vagrant'
     
     config.vm.provider 'virtualbox' do |vbox|
+        vbox.name = "kencyke-devbox"
         vbox.cpus = 4
         vbox.memory = '8192'
         vbox.gui = true
