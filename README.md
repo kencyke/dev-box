@@ -12,5 +12,6 @@ Set up a virtual environment for my development.
 ```bash
 $ git clone https://github.com/kencyke/dev-box.git
 $ cd dev-box
-$ vagrant up
+$ vagrant up --provision
+$ vagrant reload
 ```
